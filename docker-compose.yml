@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  server:
+    env_file: .env
+    environment:
+      - DOCKER_ENV=docker
+      - SEQUELIZE_URI=postgres://docker:docker@db:5432/prode_db
+    build: .
+    volumes:
+      - ./shared:/var/www/prode-server/shared
+      - ./shared/log:/var/log/prode-server
+    ports:
+      - "9000:80"
+    depends_on:
+      - db
+    networks:
+      - network
+
+  db:
+    image: postgres
+    expose:
+      - 5432
+    environment:
+      POSTGRES_USER: "docker"
+      POSTGRES_PASSWORD: "docker"
+    networks:
+      - network
+
+networks:
+    network:
+        driver: bridge
