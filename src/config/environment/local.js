@@ -5,6 +5,5 @@
 // ==================================
 module.exports = {
   logLevel: 'debug',
-  port: 9000,
   prettyLogs: true
 };

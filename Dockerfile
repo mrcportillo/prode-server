@@ -16,12 +16,11 @@ RUN curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.
 RUN wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 && \
     chmod +x jq-linux64 && \
     mv jq-linux64 $(which jq)
-    
-RUN npm --version
 
 # You should put here the name of your service, this is the only line you normally need to change.
 # Must be the same you have in your package.json, docker-compose.yml & CircleCi (if is used).
 ENV SERVICE_NAME prode-server
+
 WORKDIR /var/www/$SERVICE_NAME/
 
 # First copy Makefile and package.json files so that we can cache dependencies separate from source code.
@@ -36,9 +35,6 @@ RUN npm ci
 # Now add the entire source code tree
 ADD . /var/www/$SERVICE_NAME
 
-# Build the app
-RUN npm run build
-
 EXPOSE 80
 
-RUN ./run.sh
+CMD ./run.sh

@@ -4,7 +4,7 @@ set -e
 export NODE_ENV=$APP_ENV
 
 echo "Service Name $SERVICE_NAME"
-echo "ENV $DOCKER_ENV"
+echo "ENV $APP_ENV"
 
 # If your project needs the config values to be loaded into environment variables, set
 # `CONFIG_INTO_ENV_VARIABLES` to `true`, if set to `false` it will write the server config on
@@ -24,7 +24,26 @@ if [ ! -f "$CONFIGPATH/package.json" ]; then
     die "Cannot find package.json. This script must be running on the project root folder."
 fi
 
-# Start our Node.js RESTful API service, do not redirect
-cd /var/www/$SERVICE_NAME
-echo "Finished processing run.sh, about to start node server"
-node dist/index.js --name=$SERVICE_NAME
+
+if [[ "$APP_ENV" == "test" ]]; then
+    
+    cd /var/www/$SERVICE_NAME
+    # Run the linter 
+    npm run lint
+    # Run the tests
+    npm run test
+fi
+
+if [[ "$APP_ENV" == "local" ]]; then
+    # Start our Node.js RESTful API service, do not redirect
+    cd /var/www/$SERVICE_NAME
+    echo "Finished processing run.sh, about to start node server"
+    node src/index.js --use-strict --name=$SERVICE_NAME
+fi
+
+if [[ "$APP_ENV" == "local-dev" ]]; then
+    # In some networked environments (such as a container running nodemon reading across a mounted drive), you will need to use the legacyWatch: true which enabled Chokidar's polling.
+    cd /var/www/$SERVICE_NAME
+    echo "Finished processing run.sh, about to start nodemon watcher"
+    npm start
+fi

@@ -1,10 +1,11 @@
-version: "3"
+version: "2"
 
 services:
   server:
+    image: prode-server
     env_file: .env
     environment:
-      - DOCKER_ENV=docker
+      - APP_ENV=local
       - SEQUELIZE_URI=postgres://docker:docker@db:5432/prode_db
     build: .
     volumes:
