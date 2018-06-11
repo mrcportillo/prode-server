@@ -5,5 +5,15 @@
 // ==================================
 module.exports = {
   logLevel: 'debug',
-  prettyLogs: true
+  port: 9000,
+  prettyLogs: true,
+  sequelize: {
+    uri: process.env.SEQUELIZE_URI,
+    options: {
+      dialect: 'postgres',
+      logging: message => {
+        return console.log(pd.sql(message));
+      }
+    }
+  }
 };
