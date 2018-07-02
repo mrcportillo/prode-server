@@ -1,0 +1,32 @@
+{
+  "development": {
+    "username": "mzubieta",
+    "password": "pucheto22",
+    "database": "prode2",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "define": {
+      "timestamps": false
+   }
+  },
+  "test": {
+    "username": "mzubieta",
+    "password": "pucheto22",
+    "database": "prode2",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "define": {
+      "timestamps": false
+   }
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "define": {
+      "timestamps": false
+   }
+  }
+}

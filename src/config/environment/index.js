@@ -30,6 +30,13 @@ var all = {
 
   // Client url
   clientUrl: 'http://localhost:8090',
+  db:{
+    host: 'localhost',
+    port: 5432,
+    name: 'prode2',
+    username: 'mzubieta',
+    password: 'pucheto22'
+  },
 
   logLevel: process.env.LOG_LEVEL || 'info',
   prettyLogs: false

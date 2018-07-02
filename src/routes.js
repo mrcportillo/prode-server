@@ -1,15 +1,12 @@
-/**
- * Main application routes
- */
-
 'use strict';
 
 import apiCompetitions from './api/competition';
+import apiPredictions from './api/prediction';
+import apiAuth from './auth';
+
 
 export default function(app) {
-  // Insert routes below
   app.use('/api/competitions', apiCompetitions);
-  app.use('/api/check', (req, res) => {
-    res.send({ ok: true, time: new Date().toISOString() });
-  });
+  app.use('/api/predictions', apiPredictions);
+  app.use('/auth', apiAuth);
 }

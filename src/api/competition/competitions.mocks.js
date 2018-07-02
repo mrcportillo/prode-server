@@ -1,1 +1,0 @@
-export const competitions = [{ id:1, name:'World cup', teams:32},{ id:2, name:'Super liga', teams:24},{ id:3, name:'Copa Argentina', teams:64}];
